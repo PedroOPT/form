@@ -36,8 +36,8 @@ export class UserController {
     }
 
 
+    //@UseGuards(JwtAuthGuard)
     @Get(':telephone')
-    @UseGuards(JwtAuthGuard)
     async getById(@Param('telephone') telephone) {
         const user = await this.userService.getUser(telephone);
         return new Result(null, true, user, null);
@@ -57,7 +57,7 @@ export class UserController {
                 new UserAccount
                     (model.telephone, password, confirmToken, null, ['user'], false)
             );
-            const user = new User(model.name, model.email, model.telephone, null, null, [], userAccount);
+            const user = new User(model.name, model.email, model.telephone, null, null, [], [], [], [], userAccount);
             const res = await this.userService.create(user);
 
             const mail = {

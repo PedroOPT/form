@@ -22,64 +22,59 @@ export const UserSchema = new mongoose.Schema({
         },
     },
     homeAddress: {
-        zipCode: {
+        title: {
             type: String,
         },
-        street: {
-            type: String,
+        latitude: {
+            type: Number,
         },
-        number: {
-            type: String,
-        },
-        complement: {
-            type: String,
-        },
-        neighborhood: {
-            type: String,
-        },
-        city: {
-            type: String,
-        },
-        state: {
-            type: String,
-        },
-        country: {
-            type: String,
+        longitude: {
+            type: Number,
         },
     },
     workAddress: {
-        zipCode: {
+        title: {
             type: String,
         },
-        street: {
-            type: String,
+        latitude: {
+            type: Number,
         },
-        number: {
-            type: String,
-        },
-        complement: {
-            type: String,
-        },
-        neighborhood: {
-            type: String,
-        },
-        city: {
-            type: String,
-        },
-        state: {
-            type: String,
-        },
-        country: {
-            type: String,
+        longitude: {
+            type: Number,
         },
     },
+    recents: [
+        {
+            title: {
+                type: String,
+            },
+            latitude: {
+                type: Number,
+            },
+            longitude: {
+                type: Number,
+            },
+        },
+    ],
+    favorites: [
+        {
+            title: {
+                type: String,
+            },
+            latitude: {
+                type: Number,
+            },
+            longitude: {
+                type: Number,
+            },
+        },
+    ],
     appointments: [
         {
-            category: {
-                type: String,
-                enum: ['warning', 'alert'],
-            },
             description: {
+                type: String,
+            },
+            title: {
                 type: String,
             },
             latitude: {
@@ -88,6 +83,16 @@ export const UserSchema = new mongoose.Schema({
             longitude: {
                 type: Number,
             }
+        },
+    ],
+    friends: [
+        {
+            name: {
+                type: String,
+            },
+            telephone: {
+                type: String,
+            },
         },
     ],
     userAccount: {

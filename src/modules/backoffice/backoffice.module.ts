@@ -10,12 +10,14 @@ import { JwtEstrategy } from 'src/shared/strategies/jwt.strategy';
 import { AccountController } from './controllers/account.controller';
 import { AddressController } from './controllers/address.controller';
 import { AppointmentController } from './controllers/appointment.controller';
+import { FriendController } from './controllers/friend.controller';
 import { UserController } from './controllers/user.controller';
 import { UserAccountSchema } from './schemas/user-account.schema';
 import { UserSchema } from './schemas/user.schema';
 import { AccountService } from './services/account.service';
 import { AddressService } from './services/address.service';
 import { AppointmentService } from './services/appointment.service';
+import { FriendService } from './services/friend.service';
 import { UserService } from './services/user.service';
 
 @Module({
@@ -45,12 +47,14 @@ import { UserService } from './services/user.service';
         AccountController,
         AddressController,
         AppointmentController,
+        FriendController,
         UserController,
     ],
     providers: [
         AccountService,
         AddressService,
         AppointmentService,
+        FriendService,
         UserService,
         AuthService,
         JwtEstrategy,

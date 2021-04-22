@@ -10,7 +10,7 @@ import { AddressService } from "../services/address.service";
 export class AddressController {
     constructor(private readonly addressService: AddressService) {
     }
-    
+
     @Post(':telephone/home')
     @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
     async postHomeAddress(@Param('telephone') telephone, @Body() model: Address) {
@@ -35,5 +35,36 @@ export class AddressController {
                 (new Result('Não foi possivel realizar o cadastro', false, null, error),
                     HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @Post(':telephone/favorites')
+    @UseInterceptors(new ValidatorInterceptor(new CreateAddressContract()))
+    async postFavoriteAddress(@Param('telephone') telephone, @Body() model: Address) {
+        try {
+            await this.addressService.createAddress(telephone, model, AddressType.Favorite);
+            return new Result('Endereço do trabalho cadastrado com sucesso!', true, model, null);
+        } catch (error) {
+            throw new HttpException
+                (new Result('Não foi possivel realizar o cadastro', false, null, error),
+                    HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @Get(':telephone/home')
+    async getHomeAddress(@Param('telephone') telephone) {
+        const user = await this.addressService.getAddress(telephone, AddressType.Home);
+        return new Result(null, true, user, null);
+    }
+
+    @Get(':telephone/work')
+    async getWorkAddress(@Param('telephone') telephone) {
+        const user = await this.addressService.getAddress(telephone, AddressType.Work);
+        return new Result(null, true, user, null);
+    }
+
+    @Get(':telephone/favorites')
+    async getFavoritesAddresses(@Param('telephone') telephone) {
+        const user = await this.addressService.getAddress(telephone, AddressType.Favorite);
+        return new Result(null, true, user, null);
     }
 }
